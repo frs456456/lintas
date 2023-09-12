@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\JabatanController;
 use Illuminate\Support\Facades\File;
 
 /*
@@ -124,6 +125,9 @@ Route::get('/editarsip', [HomeController::class, 'editarsip'])->name('editarsip'
 Route::POST('/updatearsip', [HomeController::class, 'updatearsip'])->name('updatearsip');
 Route::get('/hapusarsip/{id}', [HomeController::class, 'hapusarsip'])->name('hapusarsip');
 
+Route::get('/jabatan', [App\Http\Controllers\JabatanController::class, 'jabatan'])->name('jabatan');
+Route::POST('/simpanjabatan', [JabatanController::class, 'simpanjabatan'])->name('simpanjabatan');
+Route::get('/hapusjabatan/{id}', [JabatanController::class, 'hapusjabatan'])->name('hapusjabatan');
 
 // $filesInFolder = File::files(resource_path('views'));
 // foreach ($filesInFolder as $path) {

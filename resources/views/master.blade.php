@@ -137,9 +137,9 @@ $sec = "600";
 
                         <li class="has_sub">
                             <a href="javascript:void(0);" class="waves-effect"><i class="ti-settings"></i> <span>
-                                    Data Masterrr</span> <span class="pull-right"><i class="mdi mdi-plus"></i></span></a>
+                                    Data Master</span> <span class="pull-right"><i class="mdi mdi-plus"></i></span></a>
                             <ul class="list-unstyled">
-                                <li><a href="{{url('/')}}" class="waves-effect"><i class="ti-user"></i><span>
+                                <li><a href="{{url('/jabatan')}}" class="waves-effect"><i class="ti-user"></i><span>
                                             Jabatan</span></a></li>
                                 <li><a href="{{url('/')}}" class="waves-effect"><i class="ti-user"></i><span>
                                             Divisi</span></a></li>
