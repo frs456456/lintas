@@ -128,6 +128,8 @@ Route::get('/hapusarsip/{id}', [HomeController::class, 'hapusarsip'])->name('hap
 Route::get('/jabatan', [App\Http\Controllers\JabatanController::class, 'jabatan'])->name('jabatan');
 Route::POST('/simpanjabatan', [JabatanController::class, 'simpanjabatan'])->name('simpanjabatan');
 Route::get('/hapusjabatan/{id}', [JabatanController::class, 'hapusjabatan'])->name('hapusjabatan');
+Route::get('/editjabatan', [JabatanController::class, 'editjabatan'])->name('editjabatan');
+Route::POST('/updatejabatan', [JabatanController::class, 'updatejabatan'])->name('updatejabatann');
 
 // $filesInFolder = File::files(resource_path('views'));
 // foreach ($filesInFolder as $path) {

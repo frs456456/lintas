@@ -132,7 +132,7 @@ $fileName = Route::current()->getName();
                     @csrf
 
                     <div class="form-group"><label class="control-label">Jabatan</label>
-                        <div><input type="text" name="nm_jabatan" id="nama" placeholder="Jabatan" class="form-control" required></div>
+                        <div><input type="text" name="nama" id="nama" placeholder="Merek HP" class="form-control" required></div>
                     </div>
 
                     <div class="modal-footer">
@@ -165,7 +165,7 @@ $fileName = Route::current()->getName();
                 dataType: "JSON",
                 success: function(data) {
                     $('#id').val(data.id);
-                    $('#nm_jabatan').val(data.nm_jabatan);
+                    $('#nama').val(data.nm_jabatan);
                     $('#modal_edit').modal('show');
                 }
 

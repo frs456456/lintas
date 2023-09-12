@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
 use Illuminate\View\View;
+use App\Models\Jabatan;
 
 
 class JabatanController extends Controller
@@ -43,6 +44,27 @@ class JabatanController extends Controller
             Session::flash('sukses', 'Data gagal disimpan.');
         }
         return redirect('jabatan');
+    }
+
+    public function editjabatan(Request $request)
+    {
+        $data = Jabatan::findOrFail($request->get('id'));
+        echo json_encode($data);
+    }
+
+    public function updatejabatan(Request $request)
+
+    {
+        $data = array(
+            'nm_jabatan' => $request->post('nama'),
+        );
+        $simpan = DB::table('jabatan')->where('id', '=', $request->post('id'))->update($data);
+        if ($simpan) {
+            Session::flash('status', 'Data berhasil diupdate.');
+        } else {
+            Session::flash('status', 'Data gagal diupdate.');
+        }
+        return redirect('jabatan')->with("sukses", "berhasil diubah");
     }
 
     public function hapusjabatan($id)
