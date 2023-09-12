@@ -135,6 +135,17 @@ $sec = "600";
                             </li>
                         <?php } ?>
 
+                        <li class="has_sub">
+                            <a href="javascript:void(0);" class="waves-effect"><i class="ti-settings"></i> <span>
+                                    Data Master</span> <span class="pull-right"><i class="mdi mdi-plus"></i></span></a>
+                            <ul class="list-unstyled">
+                                <li><a href="{{url('/')}}" class="waves-effect"><i class="ti-user"></i><span>
+                                            Jabatan</span></a></li>
+                                <li><a href="{{url('/')}}" class="waves-effect"><i class="ti-user"></i><span>
+                                            Divisi</span></a></li>
+                            </ul>
+                        </li>
+
                         <?php if ($role == 1) { ?>
                             <li><a href="{{url('/arsip')}}" class="waves-effect"><i class="ti-zip"></i><span>
                                         Arsip</span></a></li>
