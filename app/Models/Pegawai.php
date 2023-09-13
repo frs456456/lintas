@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Pegawai extends Model
 {
     protected $table = "pegawai";
-    protected $fillable = ["nip", "nama", "divisi", "bagian","jabatan"];
+    protected $fillable = ["nip", "nama", "id_jabatan", "no_telp","create_at","update_at"];
 
-    public function peminjaman()
+    public function pegawaii()
     {
-        return $this->hasMany('App\Peminjaman');
+        return $this->hasMany('App\Pegawai');
     }
 }

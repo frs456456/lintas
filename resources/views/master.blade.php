@@ -17,7 +17,7 @@ $sec = "600";
     <!-- DataTables -->
     <link href="assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/plugins/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/datatables/dataTables.bootstrap.min.csss" rel="stylesheet" type="text/css" />
 
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet" type="text/css">
@@ -139,6 +139,8 @@ $sec = "600";
                             <a href="javascript:void(0);" class="waves-effect"><i class="ti-settings"></i> <span>
                                     Data Master</span> <span class="pull-right"><i class="mdi mdi-plus"></i></span></a>
                             <ul class="list-unstyled">
+                                <li><a href="{{url('/pegawai')}}" class="waves-effect"><i class="ti-user"></i><span>
+                                            Pegawai</span></a></li>
                                 <li><a href="{{url('/jabatan')}}" class="waves-effect"><i class="ti-user"></i><span>
                                             Jabatan</span></a></li>
                                 <li><a href="{{url('/')}}" class="waves-effect"><i class="ti-user"></i><span>

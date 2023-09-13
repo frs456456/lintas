@@ -7,11 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Jabatan extends Model
 {
+    use HasFactory;
     protected $table = "jabatan";
     protected $fillable = ["nm_jabatan"];
 
-    public function arsip()
+    public function jabatan()
     {
-        return $this->hasMany('App\Arsip');
+
+        return $this->hasMany(User::class);
     }
 }

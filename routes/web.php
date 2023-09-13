@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JabatanController;
+use App\Http\Controllers\PegawaiController;
 use Illuminate\Support\Facades\File;
 
 /*
@@ -129,7 +130,13 @@ Route::get('/jabatan', [App\Http\Controllers\JabatanController::class, 'jabatan'
 Route::POST('/simpanjabatan', [JabatanController::class, 'simpanjabatan'])->name('simpanjabatan');
 Route::get('/hapusjabatan/{id}', [JabatanController::class, 'hapusjabatan'])->name('hapusjabatan');
 Route::get('/editjabatan', [JabatanController::class, 'editjabatan'])->name('editjabatan');
-Route::POST('/updatejabatan', [JabatanController::class, 'updatejabatan'])->name('updatejabatann');
+Route::POST('/updatejabatan', [JabatanController::class, 'updatejabatan'])->name('updatejabatan');
+
+Route::get('/pegawai', [PegawaiController::class, 'pegawai'])->name('pegawai');
+Route::POST('/simpanpegawai', [PegawaiController::class, 'simpanpegawai'])->name('simpanpegawai');
+Route::get('/hapuspegawai/{id}', [PegawaiController::class, 'hapuspegawai'])->name('hapuspegawai');
+Route::get('/editpegawai', [PegawaiController::class, 'editpegawai'])->name('editpegawai');
+Route::POST('/updatepegawai', [PegawaiController::class, 'updatepegawai'])->name('updatepegawai');
 
 // $filesInFolder = File::files(resource_path('views'));
 // foreach ($filesInFolder as $path) {

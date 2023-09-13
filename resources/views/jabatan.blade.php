@@ -5,13 +5,18 @@
 <?php
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\File;
 
 $roleadmin = Auth::user()->role;
 $fileName = Route::current()->getName();
 
 ?>
 
+<!-- Alert -->
+<style>
+    .alertku {
+        display: none;
+    }
+</style>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -23,8 +28,7 @@ $fileName = Route::current()->getName();
                 <div class="card-body">
 
                     @if(Session::has('sukses'))
-                    <div class="alert alert-success">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <div class="alert alert-success alert-dismissible alertku fade in">
                         {{ Session::get('sukses') }}
                     </div>
                     @endif
@@ -132,7 +136,7 @@ $fileName = Route::current()->getName();
                     @csrf
 
                     <div class="form-group"><label class="control-label">Jabatan</label>
-                        <div><input type="text" name="nama" id="nama" placeholder="Merek HP" class="form-control" required></div>
+                        <div><input type="text" name="nama" id="nama" placeholder="{{$fileName}}" class="form-control" required></div>
                     </div>
 
                     <div class="modal-footer">
@@ -156,6 +160,10 @@ $fileName = Route::current()->getName();
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script>
     $(document).ready(function() {
+
+        // Alert
+        $(".alertku").delay().fadeIn().delay(3000).fadeOut();
+
         //edit data
         $('body').on('click', '.edit{{$fileName}}', function() {
             var id = $(this).attr('data-id');

@@ -7,7 +7,15 @@
 use Illuminate\Support\Facades\Auth;
 
 $roleadmin = Auth::user()->role;
+$fileName = Route::current()->getName();
 ?>
+
+<!-- Alert -->
+<style>
+    .alertku {
+        display: none;
+    }
+</style>
 
 <div class="container">
     <div class="row justify-content-center">
@@ -20,7 +28,7 @@ $roleadmin = Auth::user()->role;
                 <div class="card-body">
 
                     @if(Session::has('sukses'))
-                    <div class="alert alert-success">
+                    <div class="alert alert-success alertku fade in">
                         {{ Session::get('sukses') }}
                     </div>
                     @endif
@@ -29,9 +37,8 @@ $roleadmin = Auth::user()->role;
                         <div class="col-md-12">
                             <div class="panel panel-primary">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Data Pegawai</h3>
                                     <button type="button" class="btn btn-success btn-primary waves-effect waves-light" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i>
-                                        Tambah</button>
+                                        Tambah Pegawai</button>
                                 </div>
 
                                 <div class="panel-body">
@@ -42,11 +49,10 @@ $roleadmin = Auth::user()->role;
                                                     <thead>
                                                         <tr>
                                                             <th width="1%">No</th>
-                                                            <th>NIPP</th>
+                                                            <th>NIP</th>
                                                             <th>Nama</th>
-                                                            <th>Bagian</th>
-                                                            <th>Unit Kerja</th>
                                                             <th>Jabatan</th>
+                                                            <th>No. Telp</th>
                                                             <th>Option</th>
                                                         </tr>
                                                     </thead>
@@ -54,19 +60,18 @@ $roleadmin = Auth::user()->role;
                                                         @php
                                                         $no = 1;
                                                         @endphp
-                                                        @foreach($pegawai as $pegawai)
+                                                        @foreach($pegawai as $p)
                                                         <tr>
                                                             <td>{{$no++}}</td>
-                                                            <td>{{$pegawai->nip}}</td>
-                                                            <td>{{$pegawai->nama}}</td>
-                                                            <td>{{$pegawai->divisi}}</td>
-                                                            <td>{{$pegawai->bagian}}</td>
-                                                            <td>{{$pegawai->jabatan}}</td>
+                                                            <td>{{$p->nip}}</td>
+                                                            <td>{{$p->nama}}</td>
+                                                            <td>{{$p->nm_jabatan}}</td>
+                                                            <td>{{$p->no_telp}}</td>
 
                                                             <td class="text-center">
-                                                                <button type="button" class="btn btn-xs btn-success edit_pegawai" data-id="{{$pegawai->id}}"><i class="fa fa-pencil"></i></button>
+                                                                <button type="button" class="btn btn-xs btn-success edit{{$fileName}}" data-id="{{$p->id}}"><i class="fa fa-pencil"></i></button>
 
-                                                                <a href="{{ url('/pegawai/hapus/'.$pegawai->id) }}" class="btn btn-xs btn-danger" onclick="return confirm('Yakin akan hapus data ??')"><i class="fa fa-trash"></i></a>
+                                                                <button type="button" data-id="{{$p->id}}" class="btn btn-xs btn-danger sa-params" id="sa-params"><i class="fa fa-trash"></i></button>
 
                                                             </td>
                                                         </tr>
@@ -97,27 +102,26 @@ $roleadmin = Auth::user()->role;
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title" id="myModalLabel">Tambah Data</h4>
+                <h4 class="modal-title" id="myModalLabel">Tambah Data Pegawai</h4>
             </div>
             <div class="modal-body">
-                <form name="frm_add" id="frm_add" action="{{route('simpan_pegawai')}}" method="POST" enctype="multipart/form-data">
+                <form name="frm_add" id="frm_add" action="simpanpegawai" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group"><label class="control-label">NIP</label>
-                        <div><input type="text" name="nip" placeholder="NIP" class="form-control" required></div>
+                        <div><input type="text" name="nip" id="" placeholder="NIP" class="form-control" required></div>
                     </div>
                     <div class="form-group"><label class="control-label">Nama</label>
-                        <div><input type="text" name="nama" placeholder="Nama Pegawai" class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="form-group"><label class="control-label">Bagian</label>
-                        <div><input type="text" name="divisi" placeholder="Bagian" class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="form-group"><label class="control-label">Unit Kerja</label>
-                        <div><input type="text" name="bagian" placeholder="Unit Kerja" class="form-control" required></div>
+                        <div><input type="text" name="nama" id="" placeholder="Nama" class="form-control" required></div>
                     </div>
                     <div class="form-group"><label class="control-label">Jabatan</label>
-                        <div><input type="text" name="jabatan" placeholder="Jabatan" class="form-control" required></div>
+                        <select class="form-control" name="jabatan" id="kategori">
+                            @foreach($jabatan as $p)
+                            <option value="{{$p->id}}"> {{$p->nm_jabatan}} </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group"><label class="control-label">No. Telp</label>
+                        <div><input type="text" name="no_telp" id="" placeholder="Nomor Telepon" class="form-control" required></div>
                     </div>
 
                     <div class="form-group"><label class="control-label"></label>
@@ -126,9 +130,10 @@ $roleadmin = Auth::user()->role;
                     </div>
                 </form>
             </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+        </div>
+    </div>
+</div>
+<!-- /.modal -->
 <!-- END MODAL TAMBAH DATA -->
 <!-- END MODAL TAMBAH DATA -->
 
@@ -143,24 +148,24 @@ $roleadmin = Auth::user()->role;
                 <h4 class="modal-title" id="myModalLabel">Ubah DATA</h4>
             </div>
             <div class="modal-body">
-                <form name="frm_add" id="frm_add" action="{{route('update_pegawai')}}" method="POST" enctype="multipart/form-data">
+                <form name="frm_add" id="frm_add" action="update{{$fileName}}" method="POST" enctype="multipart/form-data">
                     @csrf
+
                     <div class="form-group"><label class="control-label">NIP</label>
-                        <div><input type="text" name="nip" id="nip" placeholder="Merek HP" class="form-control" required></div>
+                        <div><input type="text" name="nip" id="nip" placeholder="NIP" class="form-control" required></div>
                     </div>
                     <div class="form-group"><label class="control-label">Nama</label>
-                        <div><input type="text" name="nama" id="nama" placeholder="Merek HP" class="form-control" required></div>
-                    </div>
-                    <div class="form-group"><label class="control-label">Bagian</label>
-                        <div><input type="text" name="divisi" id="divisi" placeholder="Tipe" class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="form-group"><label class="control-label">Unit Kerja</label>
-                        <div><input type="text" name="bagian" id="bagian" value="" placeholder="Warna" class="form-control" required>
-                        </div>
+                        <div><input type="text" name="nama" id="nama" placeholder="Nama" class="form-control" required></div>
                     </div>
                     <div class="form-group"><label class="control-label">Jabatan</label>
-                        <div><input type="text" name="jabatan" id="jabatan" value="" placeholder="IMEI 1" class="form-control" required></div>
+                        <select class="form-control" name="jabatan" id="jabatan">
+                            @foreach($jabatan as $p)
+                            <option value="{{$p->id}}"> {{$p->nm_jabatan}} </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group"><label class="control-label">No Telepon</label>
+                        <div><input type="text" name="no_telp" id="no_telp" placeholder="No Telepon" class="form-control" required></div>
                     </div>
 
                     <div class="modal-footer">
@@ -184,23 +189,48 @@ $roleadmin = Auth::user()->role;
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script>
     $(document).ready(function() {
+
+        // Alert
+        $(".alertku").delay().fadeIn().delay(3000).fadeOut();
+
         //edit data
-        $('body').on('click', '.edit_pegawai', function() {
+        $('body').on('click', '.edit{{$fileName}}', function() {
             var id = $(this).attr('data-id');
             $.ajax({
-                url: "{{route('edit_pegawai')}}?id=" + id,
+                url: "edit{{$fileName}}?id=" + id,
                 type: "GET",
                 dataType: "JSON",
                 success: function(data) {
                     $('#id').val(data.id);
                     $('#nip').val(data.nip);
                     $('#nama').val(data.nama);
-                    $('#divisi').val(data.divisi);
-                    $('#bagian').val(data.bagian);
-                    $('#jabatan').val(data.jabatan);
+                    $('#jabatan').val(data.id_jabatan);
+                    $('#no_telp').val(data.no_telp);
                     $('#modal_edit').modal('show');
                 }
 
+            });
+        });
+
+        $('body').on("click", '.sa-params', function() {
+            var idhapus = $(this).attr('data-id');
+            swal({
+                title: "Apakah anda yakin?",
+                text: "Data yang sudah di hapus tidak dapat dikembalikan!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "No, cancel !",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            }, function(isConfirm) {
+                if (isConfirm) {
+                    location.href = 'hapus{{$fileName}}/' + idhapus;
+                    swal("Terhapus!", "Data berhasil dihapus.", "success");
+                } else {
+                    swal("Cancelled", "Your imaginary file is safe :)", "error");
+                }
             });
         });
 
