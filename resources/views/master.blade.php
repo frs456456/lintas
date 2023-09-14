@@ -130,7 +130,7 @@ $sec = "600";
                     <ul>
                         <?php if ($role == 1) { ?>
                             <li>
-                                <a href="{{ url('/home') }}" class="waves-effect"><i class="ti-home"></i><span> Dashboard
+                                <a href="{{ url('/divisi') }}" class="waves-effect"><i class="ti-home"></i><span> Dashboard
                                     </span></a>
                             </li>
                         <?php } ?>
@@ -139,9 +139,11 @@ $sec = "600";
                             <a href="javascript:void(0);" class="waves-effect"><i class="ti-settings"></i> <span>
                                     Data Master</span> <span class="pull-right"><i class="mdi mdi-plus"></i></span></a>
                             <ul class="list-unstyled">
+                            <li><a href="{{url('/barang')}}" class="waves-effect"><i class="ti-user"></i><span>
+                                            Barang</span></a></li>
                                 <li><a href="{{url('/')}}" class="waves-effect"><i class="ti-user"></i><span>
                                             Jabatan</span></a></li>
-                                <li><a href="{{url('/')}}" class="waves-effect"><i class="ti-user"></i><span>
+                                <li><a href="{{url('/divisi')}}" class="waves-effect"><i class="ti-user"></i><span>
                                             Divisi</span></a></li>
                             </ul>
                         </li>
