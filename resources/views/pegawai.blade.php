@@ -114,7 +114,7 @@ $fileName = Route::current()->getName();
                         <div><input type="text" name="nama" id="" placeholder="Nama" class="form-control" required></div>
                     </div>
                     <div class="form-group"><label class="control-label">Jabatan</label>
-                        <select class="form-control" name="jabatan" id="kategori">
+                        <select class="form-control" name="jabatan" id="jabatan">
                             @foreach($jabatan as $p)
                             <option value="{{$p->id}}"> {{$p->nm_jabatan}} </option>
                             @endforeach
@@ -123,6 +123,7 @@ $fileName = Route::current()->getName();
                     <div class="form-group"><label class="control-label">No. Telp</label>
                         <div><input type="text" name="no_telp" id="" placeholder="Nomor Telepon" class="form-control" required></div>
                     </div>
+                    <input type="hidden" class="form-control" name="created" id="created" aria-describedby="created" value="{{ Auth::user()->name }}">
 
                     <div class="form-group"><label class="control-label"></label>
                         <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
@@ -172,6 +173,7 @@ $fileName = Route::current()->getName();
                     </div>
 
                     <input type="hidden" name="id" id="id" value="">
+                    <input type="hidden" class="form-control" name="updated" id="updated" aria-describedby="updated" value="{{ Auth::user()->name }}">
                     <div class="form-group"><label class="control-label"></label>
                         <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary waves-effect waves-light">Ubah</button>

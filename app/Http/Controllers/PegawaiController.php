@@ -29,6 +29,7 @@ class PegawaiController extends Controller
             'no_telp' => $request->post('no_telp'),
             'created_at' => $created_at,
             'updated_at' => $created_at,
+            'created_by' => $request->created,
         ]);
         if ($simpan) {
             Session::flash('sukses', 'Data berhasil disimpan.');
@@ -47,11 +48,14 @@ class PegawaiController extends Controller
     public function updatepegawai(Request $request)
 
     {
+        $updated_at = date("Y-m-d H:i:s");
         $data = array(
             'nip' => $request->post('nip'),
             'nama' => $request->post('nama'),
             'id_jabatan' => $request->post('jabatan'),
             'no_telp' => $request->post('no_telp'),
+            'updated_at' => $updated_at,
+            'updated_by' => $request->updated,
         );
         $simpan = DB::table('pegawai')->where('id', '=', $request->post('id'))->update($data);
         if ($simpan) {
