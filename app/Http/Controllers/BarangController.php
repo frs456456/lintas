@@ -11,7 +11,7 @@ use App\Models\barang;
 
 class BarangController extends Controller
 {
-    
+
     public function barang(): View
     {
         $barang = DB::table('barang')->paginate(5);
@@ -32,16 +32,15 @@ class BarangController extends Controller
         DB::table('barang')->insert([
             'nama' => $request->nama,
             'image' => $nama_file,
-            'qty'=> $request->qty,
+            'qty' => $request->qty,
             'created_at' => $created_at,
             'updated_at' => $created_at,
             'created_by' => $request->created,
-                     
+
         ]);
         return redirect('/barang')->with('message', 'User berhasil ditambahkan!');
-        
     }
-    
+
     public function hapusbarang($id)
     {
         // hapus barang berdasarkan id yang dipilih
@@ -59,18 +58,25 @@ class BarangController extends Controller
 
     {
         $file = $request->file('file');
+        if ($file) {
+            $tujuan_upload = 'img';
+            $nama_file = time() . "_" . $file->getClientOriginalName();
 
+            // upload file
+            $file->move($tujuan_upload, $nama_file);
+            $data = array(
+                'nama' => $request->post('nama'),
+                'image' => $nama_file,
+                'qty' => $request->post('qty'),
+            );
+        } else {
+            $data = array(
+                'nama' => $request->post('nama'),
+                'qty' => $request->post('qty'),
+            );
+        }
         // isi dengan nama folder tempat kemana file diupload
-        $tujuan_upload = 'img';
-        $nama_file = time() . "_" . $file->getClientOriginalName();
 
-        // upload file
-        $file->move($tujuan_upload, $nama_file);
-        $data = array(
-            'nama' => $request->post('nama'),
-            'image'=> $nama_file,
-            'qty' => $request->post('qty'),
-        );
         $simpan = DB::table('barang')->where('id', '=', $request->post('id'))->update($data);
         if ($simpan) {
             Session::flash('status', 'Data berhasil diupdate.');
@@ -79,6 +85,4 @@ class BarangController extends Controller
         }
         return redirect('barang')->with("sukses", "berhasil diubah");
     }
-
-
 }

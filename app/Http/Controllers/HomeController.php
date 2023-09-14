@@ -54,6 +54,7 @@ class HomeController extends Controller
 
     public function simpan_pegawai(Request $request)
     {
+
         $simpan = DB::table('pegawai')->insert([
             'nip' => $request->post('nip'),
             'nama' => $request->post('nama'),

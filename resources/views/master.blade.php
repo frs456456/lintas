@@ -141,11 +141,9 @@ $sec = "600";
                             <ul class="list-unstyled">
                                 <li><a href="{{url('/pegawai')}}" class="waves-effect"><i class="ti-user"></i><span>
                                             Pegawai</span></a></li>
-                                <li><a href="{{url('/jabatan')}}" class="waves-effect"><i class="ti-user"></i><span>
+                                <li><a href="{{url('/jabatan')}}" class="waves-effect"><i class="ti-user"></i> Jabatan<span>
                                 <li><a href="{{url('/barang')}}" class="waves-effect"><i class="ti-user"></i><span>
                                             Barang</span></a></li>
-                                <li><a href="{{url('/')}}" class="waves-effect"><i class="ti-user"></i><span>
-                                            Jabatan</span></a></li>
                                 <li><a href="{{url('/divisi')}}" class="waves-effect"><i class="ti-user"></i><span>
                                             Divisi</span></a></li>
                             </ul>
