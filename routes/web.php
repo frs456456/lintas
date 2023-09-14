@@ -1,11 +1,14 @@
 <?php
 
+use App\Http\Controllers\BarangController;
+use App\Http\Controllers\DivisiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\PegawaiController;
 use Illuminate\Support\Facades\File;
+use Matrix\Operators\Division;
 
 /*
 |--------------------------------------------------------------------------
@@ -137,6 +140,23 @@ Route::POST('/simpanpegawai', [PegawaiController::class, 'simpanpegawai'])->name
 Route::get('/hapuspegawai/{id}', [PegawaiController::class, 'hapuspegawai'])->name('hapuspegawai');
 Route::get('/editpegawai', [PegawaiController::class, 'editpegawai'])->name('editpegawai');
 Route::POST('/updatepegawai', [PegawaiController::class, 'updatepegawai'])->name('updatepegawai');
+Route::get('/divisi', [DivisiController::class, 'divisi'])->name('divisi');
+Route::POST('/simpandivisi', [DivisiController::class, 'simpandivisi'])->name('simpandivisi');
+Route::get('/hapusdivisi/{id}', [DivisiController::class, 'hapusdivisi'])->name('hapusdivisi');
+Route::get('/editdivisi', [DivisiController::class, 'editdivisi'])->name('editdivisi');
+Route::POST('/updatedivisi', [DivisiController::class, 'updatedivisi'])->name('updatedivisi');
+Route::get('/barang', [BarangController::class, 'barang'])->name('barang');
+Route::POST('/simpanbarang', [BarangController::class, 'simpanbarang'])->name('simpanbarang');
+Route::get('/hapusdivisi/{id}', [DivisiController::class, 'hapusdivisi'])->name('hapusdivisi');
+Route::get('/hapusbarang/{id}', [BarangController::class, 'hapusbarang'])->name('hapusdivisi');
+Route::get('/editbarang', [BarangController::class, 'editbarang'])->name('editbarang');
+Route::POST('/updatebarang', [BarangController::class, 'updatebarang'])->name('updatebarang');
+
+
+
+
+
+
 
 // $filesInFolder = File::files(resource_path('views'));
 // foreach ($filesInFolder as $path) {
